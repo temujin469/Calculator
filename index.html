@@ -1,144 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="wiadth=device-width, initial-scale=1.0">
-  <title>if else condition</title>
-<script src="./prac.js"></script>
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    
-  }
-  .calc-body{
-    width: 250px;
-    height: 300px;
-    background-image: linear-gradient(to bottom, rgb(9, 21, 73),rgb(33, 49, 131));
-    border-radius: 20px;
-    overflow: hidden;
-    display: grid;
-    justify-items: center;
-    gap: 10px;
-    grid-template-columns: 1fr;
-    padding: 30px 10px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    
-  }
-  h2 {
-    margin: 0;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .calc-body * {
-    border-radius: 10px;
-    border: none;
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      table{
+    width: 251px;
+}
+#result{
+    width: 100%;
+    height: 80px;
     outline: none;
-    
-  }
-  .calc-body>span:hover {
-    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.568);
+    text-align: end;
+    font-size: 50px;
+}
+.btn{
+    border-radius: 0;
+    height: 60px;
+    width: 60px;
+}
+body{
+  display: grid;
+  place-content: center;
+}
 
-  }
-  .calc-body input:hover {
-    box-shadow: inset 0 0 5px 2px rgba(0, 0, 0, 0.568);
+    </style>
+  </head>
+  <body class="min-vh-100">
+    <table style="background-color: rgba(0, 0, 0, 0.322); position: absolute;" class="border" id="box"> 
+     <tr id="head">
+       <td colspan="4" style="width: 100%; font-size: 15px;">
+          <p class="float-left">created by temka</p> 
+          <ion-icon name="close-outline" class="float-right" style="font-size:20px;"></ion-icon>
+      </td>
+     </tr>
+      <tr>
+        <td colspan="4"><input type="text" id="result" placeholder="0" style="outline: none; border: none; background: none;"></td>
+      </tr>
+      <tr>
+        <td><button class="btn border" onclick="disp('/')">/</button></td>
+        <td><button class="btn border" onclick="disp('*')">x</button></td>
+        <td><button class="btn border" onclick="disp('-')">-</button></td>
+        <td><button class="btn border" onclick="clr()">c</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn border" onclick="disp('7')">7</button></td>
+        <td><button class="btn border" onclick="disp('8')">8</button></td>
+        <td><button class="btn border" onclick="disp('9')">9</button></td>
+        <td rowspan="2"><button class="btn border" onclick="disp('+')" style="height: 122px;">+</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn border" onclick="disp('4')">4</button></td>
+        <td><button class="btn border" onclick="disp('5')">5</button></td>
+        <td><button class="btn border" onclick="disp('6')">6</button></td>
+      </tr>
+      <tr>
+        <td><button class="btn border" onclick="disp('1')">1</button></td>
+        <td><button class="btn border" onclick="disp('2')">2</button></td>
+        <td><button class="btn border" onclick="disp('3')">3</button></td>
+        <td rowspan="2"><button class="btn border" onclick="solve()" style="height:122px;">=</button></td>
+      </tr>
+      <tr>
+        <td colspan="2"><button class="btn border w-100" onclick="disp('0')">0</button></td>
+        <td><button class="btn border" onclick="dis('.')">.</button></td>
+      </tr>
+    </table>
 
-  }
-    
   
- 
-  #result {
-    width: 80%;
-    height: 40px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    color: gray;
-    padding-left: 5px;
-  
-  }
-  #number,#numbers{
-    display: block;
-    width: 80%;
-    height: 30px;
 
-
-    
-  }
-  .btn {
-    width: 80%;
-    display: grid;
-    gap: 10px;
-    
-  }
-  .btn span {
-    display: flex;
-    justify-content: space-between;
-  }
-  .btn input {
-    width: 40px;
-    height: 30px;
-    
-  }
-  @media (max-width:500px) {
-    body {
-      height: 100vh;
-
-    }
-    .calc-body {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-      padding-bottom: 400px;
+    <script>
+      const result = document.getElementById('result');
       
-      box-sizing: border-box;
-    }
-    .zi {
-      width: 100%;
-      height: 2px;
-      background-color: white;
-      margin-top: 20px;
+      function disp(val){
+        result.value+=val;
+      }
+      function solve(){
+        if(result.value == '1+1' || result.value == '3*3'){
+        result.value = 'uuru bodooch sugaa!'
+        result.style.fontSize = '20px';
+        result.style.color = 'red';
+      }else if(result.value == '247'){
+        head.innerHTML = `<button onclick="love()" class="btn btn-danger">end dar</button>`;
+        result.style.fontSize = '40px';
+        result.style.color = 'red';
+        result.value =':)';
+      }
+        let x = result.value;
+        let a = eval(x);
+        result.value = a;
+      }
+      function clr(){
+        result.value = "";
+      }
+      function love(){
+        let ner = prompt('ner ee oruul');
+        alert('Зүүдэндээ чамайгаа мөрөөдөөд Зүрхээ чамд өгөхсөн Зүйрлэшгүй энэ л хайраа Зөвхөн чамдаа бэлэглэе '+ ner +' ks')
+        head.innerHTML = `<a href="https://www.instagram.com/nogoonshaazgai/" class="btn btn-primary">odoo end</a>`
+        
+        
+      }
       
-    }
     
+      
+      
+
+      const box = document.querySelector('#box');
+      const head = box.querySelector('#head');
+     
+      head.addEventListener('mousedown',()=>{
+        head.addEventListener('mousemove',drag)
+      })
+      
+      document.addEventListener('mouseup',()=>{
+        head.removeEventListener('mousemove',drag);
+      })
+      
+      
+
+
+      function drag({movementX,movementY}){
+        let getStyle = window.getComputedStyle(box);
+        let left = parseInt(getStyle.left);
+        let top = parseInt(getStyle.top);
+        box.style.left =`${left + movementX}px`;
+        box.style.top =`${top + movementY}px`;
+      }
 
     
-  }
-  
+    </script>
 
-</style>
-</head>
-<body>
-  <div class="calc-body">
-    <h2>Тооны машин</h2>
-    
-    <span id="result">0</span>
-    
-    <input type="number" value="" id="number" placeholder="number">
-    <input type="number" value="" id="numbers" placeholder="number">
-    <div class="btn">
-      <span>
-        <input type="button" value="+"  onclick=" return myFun()" >
-      <input type="button" value="-"   onclick=" return myFun2()">
-      <input type="button" value="%"  onclick="return myFun3()">
-      </span>
-      <span>
-        <input type="button" value="X"  onclick="return myFun4()">
-      <input type="button" value="2"  onclick="return myFun5()">
-      <input type="button" value="c"  onclick="return myFun6()">
-  </span>
-    </div>
-    <span class="zi"></span>
-    
-   
-
-  </div>
-  
-</body>
-</html> 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
